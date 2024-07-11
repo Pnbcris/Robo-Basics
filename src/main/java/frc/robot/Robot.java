@@ -22,6 +22,8 @@ private final CANSparkMax m_rightMotor = new CANSparkMax(3, MotorType.kBrushed);
 // (m_) - basically means "mine"; its the name I give to the component
 private final XboxController m_NormalController = new XboxController(0); 
 private final PS4Controller m_SusController = new PS4Controller(1);
+private final XboxController m_ShooterController = new XboxController(2);
+
 /*
   "MotorType." - gets from import
 
