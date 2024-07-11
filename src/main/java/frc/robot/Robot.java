@@ -5,11 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax; // MotorController
+import com.revrobotics.CANSparkLowLevel.MotorType; //Type of motor (switch between brush/brushless)
+import edu.wpi.first.wpilibj.PS4Controller; //Controller I am using (could be Xbox or PS)
 import edu.wpi.first.wpilibj.XboxController;
-
-
+import edu.wpi.first.wpilibj.xrp.XRPMotor; //XRPMotor
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -19,7 +19,9 @@ import edu.wpi.first.wpilibj.XboxController;
 public class Robot extends TimedRobot {
 private final CANSparkMax m_leftMotor = new CANSparkMax(7, MotorType.kBrushless);
 private final CANSparkMax m_rightMotor = new CANSparkMax(3, MotorType.kBrushed);
-private final XboxController m_Controller = new XboxController(0);
+// (m_) - basically means "mine"; its the name I give to the component
+private final XboxController m_NormalController = new XboxController(0); 
+private final PS4Controller m_SusController = new PS4Controller(1);
 /*
   "MotorType." - gets from import
 
@@ -46,11 +48,11 @@ private final XboxController m_Controller = new XboxController(0);
 
   @Override
   public void teleopPeriodic() {
-    if (m_Controller.getAButton())
+    if (m_NormalController.getAButton()) //"get" means its grabbing something from controller
     {
       m_leftMotor.set(.15);
     }
-    else if (m_Controller.getBButton())
+    else if (m_NormalController.getBButton())
     {
       m_leftMotor.set(-.15); 
     }
@@ -59,11 +61,11 @@ private final XboxController m_Controller = new XboxController(0);
       m_leftMotor.set(0);
     }
 
-    if (m_Controller.getXButton())
+    if (m_NormalController.getXButton())
     {
       m_rightMotor.set(.35);
     }
-    else if (m_Controller.getYButton())
+    else if (m_NormalController.getYButton())
     {
       m_rightMotor.set(-.35); 
     }
